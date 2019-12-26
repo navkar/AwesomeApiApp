@@ -24,7 +24,7 @@ namespace WebApi
         {
             services.AddCors();
             services.AddControllers();
-
+            services.AddDirectoryBrowser();
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -58,7 +58,9 @@ namespace WebApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()
